@@ -30,7 +30,7 @@ class BlinkBoxAdaptor(
         val row = position / gridSize
         val col = position % gridSize
 
-        holder.itemView.setOnClickListener {
+        holder.binding.blinkImage.setOnClickListener {
             onBoxClicked(row, col)
         }
     }
