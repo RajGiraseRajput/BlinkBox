@@ -18,11 +18,29 @@ class BlinkBoxAdaptor(
         val binding = BlinkBoxItemBinding.bind(itemView)
     }
 
+//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlinkBoxViewHolder {
+//        return BlinkBoxViewHolder(
+//            LayoutInflater.from(context).inflate(R.layout.blink_box_item, parent, false)
+//        )
+//    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlinkBoxViewHolder {
-        return BlinkBoxViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.blink_box_item, parent, false)
-        )
+        val itemView = LayoutInflater.from(context).inflate(R.layout.blink_box_item, parent, false)
+
+        // Calculate dynamic size
+        val displayMetrics = context.resources.displayMetrics
+        val screenWidth = displayMetrics.widthPixels
+        val itemSize = screenWidth / gridSize // Ensures grid fits perfectly
+
+        // Set the width and height of the item
+        val layoutParams = itemView.layoutParams
+        layoutParams.width = itemSize
+        layoutParams.height = itemSize
+        itemView.layoutParams = layoutParams
+
+        return BlinkBoxViewHolder(itemView)
     }
+
 
     override fun getItemCount(): Int = gridSize * gridSize
 
